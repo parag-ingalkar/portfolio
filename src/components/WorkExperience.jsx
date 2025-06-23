@@ -3,21 +3,21 @@ import { useRef, useEffect } from "react";
 
 const WorkExperience = () => {
 	const ref = useRef(null);
-	const isInView = useInView(ref, { once: false });
+	// const isInView = useInView(ref, { once: false });
+	const isInView = useInView(ref, {
+		threshold: 0.1,
+		once: false,
+	});
 
 	const mainControls = useAnimation();
 
 	useEffect(() => {
-		if (isInView) {
-			mainControls.start("visible");
-		}
-		if (!isInView) {
-			mainControls.start("hidden");
-		}
+		mainControls.start(isInView ? "visible" : "hidden");
 	}, [isInView]);
 	return (
 		<section
 			id="workexperience"
+			aria-labelledby="workexperience-heading"
 			className=" flex items-center min-h-screen overflow-hidden bg-gray-950 px-4 pt-24"
 		>
 			<div className="experience-section flex flex-col flex-grow">
@@ -199,9 +199,10 @@ const WorkExperience = () => {
 									/>
 								</div>
 								<motion.div
+									className="min-w-[360px] min-h-[360px]"
 									ref={ref}
 									variants={{
-										hidden: { opacity: 0, x: 500 },
+										hidden: { opacity: 0, x: 100 },
 										visible: { opacity: 1, x: 0 },
 									}}
 									initial={mainControls}

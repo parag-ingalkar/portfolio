@@ -38,7 +38,7 @@ const About = () => {
 			<div className="relative h-130 flex flex-grow items-center max-w-6xl mx-auto px-8 justify-end">
 				<motion.div
 					className="absolute h-full rounded-2xl bg-center p-4 flex flex-grow justify-end items-center inset-0"
-					style={{ backgroundImage: 'url("/profile/me2.jpg")' }}
+					style={{ backgroundImage: 'url("./profile/me2.jpg")' }}
 					ref={ref}
 					variants={{
 						hidden: { opacity: 0 },

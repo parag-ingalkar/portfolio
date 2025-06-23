@@ -41,7 +41,7 @@ const Education = () => {
 								<motion.div
 									ref={ref}
 									variants={{
-										hidden: { opacity: 0, x: -500 },
+										hidden: { opacity: 0, x: -100 },
 										visible: { opacity: 1, x: 0 },
 									}}
 									initial={mainControls}
@@ -78,7 +78,7 @@ const Education = () => {
 								<motion.div
 									ref={ref}
 									variants={{
-										hidden: { opacity: 0, x: -500 },
+										hidden: { opacity: 0, x: -100 },
 										visible: { opacity: 1, x: 0 },
 									}}
 									initial={mainControls}

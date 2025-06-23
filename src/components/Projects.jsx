@@ -5,7 +5,7 @@ const projects = [
 		title: "Spotify Playlist Manager",
 		description:
 			"Manage your Collaborative Spotify Playlists. Remove songs added by a specific Collaborator",
-		image: "/projects/spotify-flask.jpg",
+		image: "./projects/spotify-flask.jpg",
 		skills: ["React", "Tailwind", "Python", "Flask", "OAuth2"],
 		github_url: "https://github.com/parag-ingalkar/spotify-python-flask",
 	},
@@ -20,7 +20,7 @@ const projects = [
 		title: "Neural Network Logic Gates in C++ From Scratch",
 		description:
 			"Custom Neural Network from scratch in C++. Train, Save and Load models for XOR and XNOR gates. CLI interaction.",
-		image: "/projects/nn-cpp.jpg",
+		image: "./projects/nn-cpp.jpg",
 		skills: ["C++", "Deep Learning", "Custom Tensor"],
 		github_url: "https://github.com/parag-ingalkar/nn_logic_gates",
 	},
@@ -28,7 +28,7 @@ const projects = [
 		title: "Missing Migrants Visualization",
 		description:
 			"Interactive visualization to view number of missing migrants on the world map over a period of years. ",
-		image: "/projects/missing-migrants.jpg",
+		image: "./projects/missing-migrants.jpg",
 		skills: ["React", "D3.js", "Visualization"],
 		github_url:
 			"https://github.com/parag-ingalkar/missing-migrants-visualization",
@@ -37,7 +37,7 @@ const projects = [
 		title: "Plant Shopping Web App",
 		description:
 			"Shop for Plants for your garden. Add or Remove Plants in your Cart. React app with Redux store manager for managing states across application.",
-		image: "/projects/plant-shopping.jpg",
+		image: "./projects/plant-shopping.jpg",
 		skills: ["React", "Redux"],
 		github_url: "https://github.com/parag-ingalkar/e-plantShopping",
 	},

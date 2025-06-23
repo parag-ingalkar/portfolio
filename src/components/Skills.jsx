@@ -31,7 +31,7 @@ const Skills = () => {
 								<img
 									id={image}
 									className="max-w-15 w-11 h-11"
-									src={`/icons/${image}`}
+									src={`./icons/${image}`}
 								/>
 							</li>
 						);
@@ -44,7 +44,7 @@ const Skills = () => {
 								<img
 									id={`2-${image}`}
 									className="max-w-15 w-11 h-11"
-									src={`/icons/${image}`}
+									src={`./icons/${image}`}
 								/>
 							</li>
 						);
