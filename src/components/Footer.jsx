@@ -5,7 +5,7 @@ const Footer = () => (
 				Made with ❤️ using React & Tailwind
 			</p>
 			<p className="text-gray-400 text-sm">
-				© {new Date().getFullYear()} Parag Ingalkar. All rights reserved.
+				{new Date().getFullYear()} Parag Ingalkar.
 			</p>
 		</div>
 	</footer>
