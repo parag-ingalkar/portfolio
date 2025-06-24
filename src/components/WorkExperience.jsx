@@ -199,7 +199,7 @@ const WorkExperience = () => {
 									/>
 								</div>
 								<motion.div
-									className="min-w-[360px] min-h-[360px]"
+									className="min-w-[360px] min-h-[360px] flex items-center"
 									ref={ref}
 									variants={{
 										hidden: { opacity: 0, x: 100 },
@@ -221,9 +221,9 @@ const WorkExperience = () => {
 											Feb 2021 - Sep 2023
 										</time>
 										<p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-											Worked on the 3DEXPERIENCE platform, focusing on quality
-											assurance and software development for various
-											applications.
+											Worked on the 3DEXPERIENCE platform, focusing on Quality
+											Assurance, Automation Testing and Software Development for
+											various applications.
 										</p>
 									</div>
 								</motion.div>
