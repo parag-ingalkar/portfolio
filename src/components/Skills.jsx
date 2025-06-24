@@ -1,23 +1,23 @@
 const imageIcons = [
-	"bootstrap.svg",
-	"cpp.svg",
-	"css.svg",
-	"docker.svg",
-	"uipath.svg",
-	"flask-white.svg",
-	"git.svg",
-	"github-white.svg",
-	"html.svg",
-	"javascript.svg",
-	"nodejs.svg",
-	"python.svg",
-	"powerbi.svg",
-	"pytorch.svg",
-	"react.svg",
-	"sql.svg",
-	"tailwind.svg",
-	"tensorflow.svg",
-	"vscode.svg",
+	["bootstrap.svg", "Bootstrap"],
+	["cpp.svg", "C++"],
+	["css.svg", "CSS"],
+	["docker.svg", "Docker"],
+	["uipath.svg", "UiPath"],
+	["flask-white.svg", "Flask"],
+	["git.svg", "Git"],
+	["github-white.svg", "GitHub"],
+	["html.svg", "HTML"],
+	["javascript.svg", "JavaScript"],
+	["nodejs.svg", "Node.js"],
+	["python.svg", "Python"],
+	["powerbi.svg", "Power BI"],
+	["pytorch.svg", "PyTorch"],
+	["react.svg", "React"],
+	["sql.svg", "SQL"],
+	["tailwind.svg", "Tailwindcss"],
+	["tensorflow.svg", "TensorFlow"],
+	["vscode.svg", "VS Code"],
 ];
 
 const Skills = () => {
@@ -27,12 +27,16 @@ const Skills = () => {
 				<ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-marquee-move">
 					{imageIcons.map((image) => {
 						return (
-							<li key={image}>
+							<li
+								key={image[1]}
+								className="flex justify-center flex-col items-center"
+							>
 								<img
-									id={image}
+									id={image[1]}
 									className="max-w-15 w-11 h-11"
-									src={`./icons/${image}`}
+									src={`./icons/${image[0]}`}
 								/>
+								<p className="text-neutral-200 pt-2 text-nowrap">{image[1]}</p>
 							</li>
 						);
 					})}
@@ -40,12 +44,16 @@ const Skills = () => {
 				<ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-marquee-move">
 					{imageIcons.map((image) => {
 						return (
-							<li key={`2-${image}`}>
+							<li
+								key={`2-${image[1]}`}
+								className="flex justify-center flex-col items-center"
+							>
 								<img
-									id={`2-${image}`}
+									id={image[1]}
 									className="max-w-15 w-11 h-11"
-									src={`./icons/${image}`}
+									src={`./icons/${image[0]}`}
 								/>
+								<p className="text-neutral-200 pt-2 text-nowrap">{image[1]}</p>
 							</li>
 						);
 					})}
