@@ -9,13 +9,15 @@ const projects = [
 		skills: ["React", "Tailwind", "Python", "Flask", "OAuth2"],
 		github_url: "https://github.com/parag-ingalkar/spotify-python-flask",
 	},
-	// {
-	// 	title: "Tensor from scratch in C++",
-	// 	description:
-	// 		"Custom Tensor Class from scratch. Implemented support for basic Linear Algebra necessary for Neural Networks.",
-	// 	image: "/projects/spotify-flask.jpg",
-	// 	skills: ["C++", "Data Structures"],
-	// },
+	{
+		title: "MNIST Classification - Neural Network in Python",
+		description:
+			"Neural Network Package in Python and numpy from scratch. Classify MNIST handwritten digits.",
+		image: "./projects/mnist-nn-python.png",
+		skills: ["Python", "Numpy", "Deep Learning"],
+		github_url:
+			"https://github.com/parag-ingalkar/python_NN_MNIST_from_scratch",
+	},
 	{
 		title: "Neural Network Logic Gates in C++ From Scratch",
 		description:
