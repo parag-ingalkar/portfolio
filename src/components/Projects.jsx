@@ -7,7 +7,8 @@ const projects = [
 			"Manage your Collaborative Spotify Playlists. Remove songs added by a specific Collaborator",
 		image: "./projects/spotify-flask.jpg",
 		skills: ["React", "Tailwind", "Python", "Flask", "OAuth2"],
-		github_url: "https://github.com/parag-ingalkar/spotify-python-flask",
+		github_url:
+			"https://github.com/parag-ingalkar/spotify-playlist-manager-app",
 	},
 	{
 		title: "MNIST Classification - Neural Network in Python",
