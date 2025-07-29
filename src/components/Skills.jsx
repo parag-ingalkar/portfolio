@@ -47,7 +47,7 @@ const allSkills = skillCategories.flatMap((category) => category.skills);
 const Skills = () => {
 	return (
 		<section className="py-16 bg-transparent">
-			<div className="max-w-7xl mx-auto px-6">
+			<div className="max-w-7xl mx-auto px-6 relative z-10">
 				{/* Section Header */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
