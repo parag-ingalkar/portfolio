@@ -1,12 +1,37 @@
+import { motion } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 
 const projects = [
 	{
+		title: "PomoKan - Productivity Tool",
+		description:
+			"Manage your tasks with Pomodoro technique and integrated Kanban board and Eisenhower matrix. Add tasks, set timers, and track your progress.",
+		image: "./projects/pomokan.jpg",
+		skills: [
+			"Python",
+			"TypeScript",
+			"FastAPI",
+			"React",
+			"TailwindCSS",
+			"JWT",
+			"Framer-motion",
+		],
+		github_url: "https://github.com/parag-ingalkar/PomoKan",
+	},
+	{
 		title: "Spotify Playlist Manager",
 		description:
-			"Manage your Collaborative Spotify Playlists. Remove songs added by a specific Collaborator",
+			"Manage your Collaborative Spotify Playlists. Remove songs added by a specific Collaborator.",
 		image: "./projects/spotify-flask.jpg",
-		skills: ["React", "Tailwind", "Python", "Flask", "OAuth2"],
+		skills: [
+			"Python",
+			"JavaScript",
+			"Flask",
+			"React",
+			"TailwindCSS",
+			"OAuth2",
+			"API",
+		],
 		github_url:
 			"https://github.com/parag-ingalkar/spotify-playlist-manager-app",
 	},
@@ -32,7 +57,7 @@ const projects = [
 		description:
 			"Interactive visualization to view number of missing migrants on the world map over a period of years. ",
 		image: "./projects/missing-migrants.jpg",
-		skills: ["React", "D3.js", "Visualization"],
+		skills: ["JavaScript", "React", "D3.js", "Visualization"],
 		github_url:
 			"https://github.com/parag-ingalkar/missing-migrants-visualization",
 	},
@@ -41,25 +66,46 @@ const projects = [
 		description:
 			"Shop for Plants for your garden. Add or Remove Plants in your Cart. React app with Redux store manager for managing states across application.",
 		image: "./projects/plant-shopping.jpg",
-		skills: ["React", "Redux"],
+		skills: ["JavaScript", "React", "Redux"],
 		github_url: "https://github.com/parag-ingalkar/e-plantShopping",
 	},
 ];
 
 const Projects = () => (
-	<section id="projects" className="py-24 bg-gray-950">
-		<div className="max-w-7xl mx-auto px-6">
-			<div className="text-center mb-16">
-				<h2 className="text-4xl md:text-5xl font-semibold text-white mb-6">
-					Featured Projects
+	<section
+		id="projects"
+		className="section-padding bg-slate-950 relative overflow-hidden"
+	>
+		{/* Background gradient */}
+		<div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900"></div>
+
+		<div className="relative z-10 max-w-7xl mx-auto">
+			{/* Section Header */}
+			<motion.div
+				initial={{ opacity: 0, y: 30 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.6 }}
+				viewport={{ once: true }}
+				className="text-center mb-16"
+			>
+				<h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+					Featured <span className="gradient-text">Projects</span>
 				</h2>
-			</div>
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+				<div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full mb-6"></div>
+				<p className="text-slate-400 text-lg max-w-2xl mx-auto">
+					Here are some of my recent projects that showcase my skills in web
+					development, machine learning, and data visualization.
+				</p>
+			</motion.div>
+
+			{/* Projects Grid */}
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{projects.map((project, index) => (
-					<ProjectCard project={project} key={index} />
+					<ProjectCard project={project} index={index} key={index} />
 				))}
 			</div>
 		</div>
 	</section>
 );
+
 export default Projects;

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
 	motion,
 	useMotionTemplate,
@@ -6,25 +6,25 @@ import {
 	useSpring,
 } from "framer-motion";
 
-const ROTATION_RANGE = 20;
-const HALF_ROTATION_RANGE = 20 / 2;
+const ROTATION_RANGE = 15;
+const HALF_ROTATION_RANGE = ROTATION_RANGE / 2;
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, index }) => {
 	const ref = useRef(null);
+	const [isHovered, setIsHovered] = useState(false);
 
 	const x = useMotionValue(0);
 	const y = useMotionValue(0);
 
-	const xSpring = useSpring(x);
-	const ySpring = useSpring(y);
+	const xSpring = useSpring(x, { stiffness: 300, damping: 30 });
+	const ySpring = useSpring(y, { stiffness: 300, damping: 30 });
 
 	const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
 
 	const handleMouseMove = (e) => {
-		if (!ref.current) return [0, 0];
+		if (!ref.current) return;
 
 		const rect = ref.current.getBoundingClientRect();
-
 		const width = rect.width;
 		const height = rect.height;
 
@@ -38,71 +38,146 @@ const ProjectCard = ({ project }) => {
 		y.set(rY);
 	};
 
+	const handleMouseEnter = () => {
+		setIsHovered(true);
+	};
+
 	const handleMouseLeave = () => {
+		setIsHovered(false);
 		x.set(0);
 		y.set(0);
 	};
 
 	return (
-		<div className="flex justify-center">
+		<motion.div
+			initial={{ opacity: 0, y: 50 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.6, delay: index * 0.1 }}
+			viewport={{ once: true }}
+			className="flex justify-center"
+		>
 			<motion.div
 				ref={ref}
 				onMouseMove={handleMouseMove}
+				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 				style={{
 					transformStyle: "preserve-3d",
 					transform,
 				}}
-				className="relative h-120 w-80 rounded-xl bg-gradient-to-r from-slate-700 to-slate-800"
+				className="relative w-full max-w-sm group cursor-pointer"
 			>
+				{/* Card Background with Glow Effect */}
+				<div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+
+				{/* Main Card */}
 				<div
 					style={{
-						transform: "translateZ(30px)",
+						transform: "translateZ(50px)",
 						transformStyle: "preserve-3d",
 					}}
-					className="absolute inset-3 flex flex-col rounded-xl text-white bg-gradient-to-l from-slate-700 to-slate-800 shadow-lg"
+					className="relative flex flex-col h-full glass-effect rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-blue-500/25"
 				>
-					<div className="h-3/8 flex-none">
-						<img
+					{/* Image Section */}
+					<div className="relative h-48 overflow-hidden">
+						<motion.img
 							src={project.image}
 							alt={project.title}
-							className="overflow-hidden rounded-xl h-full w-full"
+							className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+							style={{
+								transform: isHovered ? "translateZ(20px)" : "translateZ(0px)",
+							}}
 						/>
+						{/* Gradient Overlay */}
+						<div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+
+						{/* Floating Badge */}
+						<motion.div
+							className="absolute top-4 right-4 glass-effect rounded-full px-3 py-1"
+							style={{
+								transform: isHovered ? "translateZ(30px)" : "translateZ(10px)",
+							}}
+						>
+							<span className="text-xs font-semibold text-white">Featured</span>
+						</motion.div>
 					</div>
-					<div className="flex flex-col grow m-3">
-						<h3 className="text-xl font-semibold font-sans">{project.title}</h3>
-						<p className="text-md font-extralight py-2">
+
+					{/* Content Section */}
+					<div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+						{/* Title */}
+						<motion.h3
+							className="text-xl font-bold text-white leading-tight"
+							style={{
+								transform: isHovered ? "translateZ(20px)" : "translateZ(0px)",
+							}}
+						>
+							{project.title}
+						</motion.h3>
+
+						{/* Description */}
+						<motion.p
+							className="text-slate-300 text-sm leading-relaxed line-clamp-3"
+							style={{
+								transform: isHovered ? "translateZ(15px)" : "translateZ(0px)",
+							}}
+						>
 							{project.description}
-						</p>
-						<div className="flex flex-wrap gap-1 mt-auto">
-							{project.skills.map((skill) => (
-								<span
-									className="bg-[#1c686b] px-2 py-1 rounded-md text-sm"
+						</motion.p>
+
+						{/* Skills Tags */}
+						<motion.div
+							className="flex flex-wrap gap-2"
+							style={{
+								transform: isHovered ? "translateZ(10px)" : "translateZ(0px)",
+							}}
+						>
+							{project.skills.map((skill, skillIndex) => (
+								<motion.span
 									key={skill}
+									initial={{ opacity: 0, scale: 0.8 }}
+									whileInView={{ opacity: 1, scale: 1 }}
+									transition={{
+										duration: 0.3,
+										delay: index * 0.1 + skillIndex * 0.05,
+									}}
+									className="px-3 py-1 text-xs font-medium bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 rounded-full border border-blue-500/30 hover:border-blue-400/50 transition-colors duration-300"
 								>
 									{skill}
-								</span>
+								</motion.span>
 							))}
-						</div>
-					</div>
-					<div className="h-10 flex-none flex justify-start items-center m-2.5 mt-0">
-						<a href={project.github_url} target="_blank">
-							<button className="flex bg-[#283e4c] hover:bg-[#2f4858] transition hover:scale-105 py-2 px-4 rounded-md items-center gap-2 text-sm">
-								<svg viewBox="0 0 438.549 438.549" width="20" height="20">
-									<path
-										fill="currentColor"
-										d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z"
-									></path>
+						</motion.div>
+
+						{/* Action Button */}
+						<motion.div
+							className="pt-4"
+							style={{
+								transform: isHovered ? "translateZ(25px)" : "translateZ(0px)",
+							}}
+						>
+							<motion.a
+								href={project.github_url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center gap-2 modern-button text-sm font-semibold rounded-xl px-6 py-3 w-full justify-center"
+								whileHover={{ scale: 1.02 }}
+								whileTap={{ scale: 0.98 }}
+							>
+								<svg
+									viewBox="0 0 24 24"
+									width="18"
+									height="18"
+									fill="currentColor"
+								>
+									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
 								</svg>
-								Source
-							</button>
-						</a>
+								View Source
+							</motion.a>
+						</motion.div>
 					</div>
 				</div>
 			</motion.div>
-		</div>
+		</motion.div>
 	);
 };
 
-// export default Example;
 export default ProjectCard;
