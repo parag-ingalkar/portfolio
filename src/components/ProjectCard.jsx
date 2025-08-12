@@ -65,7 +65,7 @@ const ProjectCard = ({ project, index }) => {
 					transformStyle: "preserve-3d",
 					transform,
 				}}
-				className="relative w-full max-w-sm group cursor-pointer"
+				className="relative w-full max-w-sm group"
 			>
 				{/* Card Background with Glow Effect */}
 				<div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
@@ -92,14 +92,20 @@ const ProjectCard = ({ project, index }) => {
 						<div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
 
 						{/* Floating Badge */}
-						<motion.div
-							className="absolute top-4 right-4 glass-effect rounded-full px-3 py-1"
-							style={{
-								transform: isHovered ? "translateZ(30px)" : "translateZ(10px)",
-							}}
-						>
-							<span className="text-xs font-semibold text-white">Featured</span>
-						</motion.div>
+						{project.project_url && (
+							<motion.div
+								className="absolute top-4 right-4 glass-effect rounded-full px-3 py-1"
+								style={{
+									transform: isHovered
+										? "translateZ(30px)"
+										: "translateZ(10px)",
+								}}
+							>
+								<span className="text-xs font-semibold text-white">
+									Featured
+								</span>
+							</motion.div>
+						)}
 					</div>
 
 					{/* Content Section */}
@@ -112,6 +118,16 @@ const ProjectCard = ({ project, index }) => {
 							}}
 						>
 							{project.title}
+							<br />
+							{project.project_url && (
+								<a
+									href={project.project_url}
+									target="blank"
+									className="text-neutral-400 text-xs font-normal"
+								>
+									{project.project_url}
+								</a>
+							)}
 						</motion.h3>
 
 						{/* Description */}

@@ -17,6 +17,7 @@ const projects = [
 			"Framer-motion",
 		],
 		github_url: "https://github.com/parag-ingalkar/PomoKan",
+		project_url: "https://pomokan-five.vercel.app/",
 	},
 	{
 		title: "Spotify Playlist Manager",
@@ -34,6 +35,7 @@ const projects = [
 		],
 		github_url:
 			"https://github.com/parag-ingalkar/spotify-playlist-manager-app",
+		project_url: "https://spotify-playlist-manager-app.vercel.app/",
 	},
 	{
 		title: "MNIST Classification - Neural Network in Python",
@@ -60,6 +62,8 @@ const projects = [
 		skills: ["JavaScript", "React", "D3.js", "Visualization"],
 		github_url:
 			"https://github.com/parag-ingalkar/missing-migrants-visualization",
+		project_url:
+			"https://parag-ingalkar.github.io/missing-migrants-visualization/",
 	},
 	{
 		title: "Plant Shopping Web App",

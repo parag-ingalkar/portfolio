@@ -6,6 +6,7 @@ const skillCategories = [
 		skills: [
 			["react.svg", "React"],
 			["javascript.svg", "JavaScript"],
+			["TypeScript.svg", "tYPEScript"],
 			["html.svg", "HTML"],
 			["css.svg", "CSS"],
 			["tailwind.svg", "Tailwind CSS"],
@@ -13,14 +14,13 @@ const skillCategories = [
 		],
 	},
 	{
-		title: "Backend & Tools",
+		title: "Backend",
 		skills: [
 			["python.svg", "Python"],
 			["nodejs.svg", "Node.js"],
 			["flask-white.svg", "Flask"],
-			["docker.svg", "Docker"],
-			["git.svg", "Git"],
-			["github-white.svg", "GitHub"],
+			["FastAPI.svg", "FastAPI"],
+			["Express.svg", "Express"],
 		],
 	},
 	{
@@ -30,6 +30,9 @@ const skillCategories = [
 			["tensorflow.svg", "TensorFlow"],
 			["powerbi.svg", "Power BI"],
 			["sql.svg", "SQL"],
+			["SQLite.svg", "SQLite"],
+			["PostgresSQL.svg", "PostgresSQL"],
+			["Matplotlib.svg", "Matplotlib"],
 		],
 	},
 	{
@@ -37,6 +40,10 @@ const skillCategories = [
 		skills: [
 			["cpp.svg", "C++"],
 			["uipath.svg", "UiPath"],
+			["Postman.svg", "Postman"],
+			["docker.svg", "Docker"],
+			["git.svg", "Git"],
+			["github-white.svg", "GitHub"],
 			["vscode.svg", "VS Code"],
 		],
 	},
@@ -62,8 +69,9 @@ const Skills = () => {
 					<div className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
 				</motion.div>
 
-				{/* Skills Grid for larger screens */}
-				<div className="hidden lg:grid grid-cols-2 xl:grid-cols-4 gap-8 mb-16">
+				{/* Skills Grid */}
+				{/* <div className=" lg:grid grid-cols-2 xl:grid-cols-4 gap-8 mb-16 bg-white/20"> */}
+				<div className="grid gap-8 mx-auto md:grid-cols-2 xl:grid-cols-4 mb-16">
 					{skillCategories.map((category, categoryIndex) => (
 						<motion.div
 							key={category.title}
@@ -103,57 +111,6 @@ const Skills = () => {
 							</div>
 						</motion.div>
 					))}
-				</div>
-
-				{/* Marquee for mobile and as additional visual element */}
-				<div className="lg:hidden mb-8">
-					<div className="relative overflow-hidden">
-						<div className="flex animate-marquee-move">
-							{[...allSkills, ...allSkills].map((skill, index) => (
-								<div
-									key={`${skill[1]}-${index}`}
-									className="flex flex-col items-center mx-6 min-w-[80px]"
-								>
-									<div className="glass-effect rounded-xl p-4 mb-2">
-										<img
-											src={`./icons/${skill[0]}`}
-											alt={skill[1]}
-											className="w-8 h-8"
-										/>
-									</div>
-									<p className="text-slate-300 text-sm text-center font-medium">
-										{skill[1]}
-									</p>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-
-				{/* Enhanced marquee for desktop as decorative element */}
-				<div className="hidden lg:block">
-					<div className="relative overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-						<div className="flex animate-marquee-move">
-							{[...allSkills, ...allSkills].map((skill, index) => (
-								<motion.div
-									key={`marquee-${skill[1]}-${index}`}
-									className="flex flex-col items-center mx-8 min-w-[100px] group"
-									whileHover={{ scale: 1.1 }}
-								>
-									<div className="glass-effect rounded-xl p-4 mb-3 group-hover:bg-white/10 transition-all duration-300">
-										<img
-											src={`./icons/${skill[0]}`}
-											alt={skill[1]}
-											className="w-10 h-10 group-hover:animate-pulse"
-										/>
-									</div>
-									<p className="text-slate-300 text-sm text-center font-medium group-hover:text-white transition-colors duration-300">
-										{skill[1]}
-									</p>
-								</motion.div>
-							))}
-						</div>
-					</div>
 				</div>
 			</div>
 		</section>
