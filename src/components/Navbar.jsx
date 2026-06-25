@@ -1,114 +1,164 @@
 import { Link } from "react-scroll";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const navItems = [
+  { to: "about",         label: "About" },
+  { to: "work",          label: "Work" },
+  { to: "projects",      label: "Projects" },
+  { to: "education",     label: "Education" },
+  { to: "contact",       label: "Contact" },
+];
 
 const Navbar = () => {
-	const [isScrolled, setIsScrolled] = useState(false);
-	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 50);
-		};
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+  return (
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        background: scrolled ? "rgba(10,10,10,0.92)" : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+        transition: "background 0.35s, border-color 0.35s, backdrop-filter 0.35s",
+      }}
+    >
+      <div className="container" style={{ paddingBlock: "1rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
 
-	const navItems = [
-		{ to: "about", label: "About" },
-		{ to: "workexperience", label: "Work" },
-		{ to: "education", label: "Education" },
-		{ to: "projects", label: "Projects" },
-	];
+        {/* Wordmark */}
+        <Link to="hero" smooth duration={500} style={{ cursor: "pointer", textDecoration: "none" }}>
+          <span style={{ fontFamily: "var(--font-display)", fontWeight: 300, fontSize: "1.1rem", color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
+            Parag Ingalkar
+          </span>
+        </Link>
 
-	return (
-		<nav
-			className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-				isScrolled ? "glass-effect shadow-lg" : "bg-transparent"
-			}`}
-		>
-			<div className="max-w-7xl mx-auto px-6 py-4">
-				<div className="flex justify-between items-center">
-					{/* Logo */}
-					<Link to="home" smooth={true} duration={500}>
-						<div className="text-xl font-bold text-white hover:cursor-pointer transition-all duration-300 hover:scale-105 gradient-text">
-							Parag Ingalkar
-						</div>
-					</Link>
+        {/* Desktop nav */}
+        <nav aria-label="Main navigation" style={{ display: "flex", gap: "2rem" }} className="hidden-mobile">
+          {navItems.map((item) => (
+            <Link key={item.to} to={item.to} smooth duration={500} offset={-80} className="nav-link">
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
-					{/* Desktop Navigation */}
-					<div className="hidden md:flex space-x-8">
-						{navItems.map((item) => (
-							<Link
-								key={item.to}
-								to={item.to}
-								smooth={true}
-								duration={500}
-								className="relative text-white hover:cursor-pointer transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm group"
-							>
-								{item.label}
-								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-							</Link>
-						))}
-					</div>
+        {/* CV button — desktop */}
+        <a
+          href="/cv.pdf"
+          download
+          className="btn-outline hidden-mobile"
+          style={{ padding: "0.45rem 1rem", fontSize: "0.8125rem" }}
+          aria-label="Download CV"
+        >
+          CV ↓
+        </a>
 
-					{/* Mobile Menu Button */}
-					<button
-						className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-all duration-300"
-						onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-						aria-label="Toggle mobile menu"
-					>
-						<svg
-							className={`w-6 h-6 transition-transform duration-300 ${
-								isMobileMenuOpen ? "rotate-90" : ""
-							}`}
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							{isMobileMenuOpen ? (
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M6 18L18 6M6 6l12 12"
-								/>
-							) : (
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M4 6h16M4 12h16M4 18h16"
-								/>
-							)}
-						</svg>
-					</button>
-				</div>
+        {/* Hamburger — mobile */}
+        <button
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{
+            display: "none",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: "var(--text-primary)",
+            padding: "0.25rem",
+          }}
+          className="show-mobile"
+        >
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+            {menuOpen ? (
+              <>
+                <line x1="3" y1="3" x2="19" y2="19" />
+                <line x1="19" y1="3" x2="3" y2="19" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="6" x2="19" y2="6" />
+                <line x1="3" y1="11" x2="19" y2="11" />
+                <line x1="3" y1="16" x2="19" y2="16" />
+              </>
+            )}
+          </svg>
+        </button>
+      </div>
 
-				{/* Mobile Menu */}
-				<div
-					className={`md:hidden transition-all duration-300 overflow-hidden ${
-						isMobileMenuOpen ? "max-h-64 opacity-100 mt-4" : "max-h-0 opacity-0"
-					}`}
-				>
-					<div className="glass-effect rounded-xl p-4 space-y-2">
-						{navItems.map((item) => (
-							<Link
-								key={item.to}
-								to={item.to}
-								smooth={true}
-								duration={500}
-								className="block text-white hover:cursor-pointer transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm"
-								onClick={() => setIsMobileMenuOpen(false)}
-							>
-								{item.label}
-							</Link>
-						))}
-					</div>
-				</div>
-			</div>
-		</nav>
-	);
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            style={{
+              borderTop: "1px solid var(--border)",
+              background: "var(--bg)",
+              overflow: "hidden",
+            }}
+          >
+            <div className="container" style={{ paddingBlock: "1.25rem", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              {navItems.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  smooth
+                  duration={500}
+                  offset={-80}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    display: "block",
+                    padding: "0.6rem 0",
+                    color: "var(--text-secondary)",
+                    fontSize: "1rem",
+                    textDecoration: "none",
+                    borderBottom: "1px solid var(--border)",
+                    cursor: "pointer",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.color = "var(--text-primary)"}
+                  onMouseLeave={e => e.currentTarget.style.color = "var(--text-secondary)"}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <a
+                href="/cv.pdf"
+                download
+                className="btn-outline"
+                style={{ marginTop: "1rem", justifyContent: "center", fontSize: "0.875rem" }}
+              >
+                Download CV
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hidden-mobile { display: none !important; }
+          .show-mobile   { display: block !important; }
+        }
+        @media (min-width: 769px) {
+          .show-mobile { display: none !important; }
+          .hidden-mobile { display: flex !important; align-items: center; }
+        }
+      `}</style>
+    </header>
+  );
 };
 
 export default Navbar;

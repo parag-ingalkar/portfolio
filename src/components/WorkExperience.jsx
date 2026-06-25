@@ -1,178 +1,121 @@
-import { motion, useInView } from "motion/react";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const workExperience = [
-	{
-		company: "Dassault Systemes Solutions Lab, Pune",
-		position: "Quality Assurance Engineer | Software Developer",
-		duration: "Feb 2021 - Sep 2023",
-		description:
-			"Worked on the 3DEXPERIENCE platform, focusing on Quality Assurance, Automation Testing and Software Development for various applications.",
-		icon: "work.svg",
-		achievements: [
-			"Developed automated testing frameworks",
-			"Improved software quality metrics by 40%",
-			"Led cross-functional team initiatives",
-		],
-	},
+const jobs = [
+  {
+    company: "Calliora",
+    location: "Germany (Remote)",
+    role: "Working Student — Full-Stack Engineer",
+    period: "2023 – 2025",
+    stack: ["Python", "FastAPI", "React", "TypeScript", "PostgreSQL", "Docker"],
+    summary:
+      "Led end-to-end feature development on a SaaS platform for German hospital billing — from requirements research through data modelling, REST API design, and frontend integration.",
+    highlights: [
+      "Engineered a rules-based inference & billing engine processing the official DRG catalog to infer additional costs per case. Validated across 200k+ historical cases for 15+ client hospitals; inference completes in under 3 minutes before production rollout.",
+      "Extended billing logic to support r-DRG and Vorhalte formats alongside ag-DRG, with a frontend toggle allowing real-time comparison of reimbursement views.",
+      "Built admin panel REST APIs and UI (full CRUD via FastAPI) enabling hospital staff to self-manage individually agreed reimbursement rates.",
+      "Developed automated backfill data pipelines to reprocess historical billing cases, enabling retrospective billing data availability.",
+      "Reduced frontend dependency bloat and maintained a clean, production-grade React/TypeScript codebase across agile sprints.",
+    ],
+  },
+  {
+    company: "Dassault Systèmes Solutions Lab",
+    location: "Pune, India",
+    role: "Quality Assurance Engineer & Software Developer",
+    period: "Feb 2021 – Sep 2023",
+    stack: ["Python", "JavaScript", "UiPath", "3DEXPERIENCE"],
+    summary:
+      "Worked on the 3DEXPERIENCE platform, building automated QA frameworks and contributing to software development for enterprise applications.",
+    highlights: [
+      "Developed automated testing frameworks that improved software quality metrics by 40%.",
+      "Led cross-functional team initiatives and contributed to release cycles for enterprise-scale applications.",
+    ],
+  },
 ];
 
 const WorkExperience = () => {
-	const ref = useRef(null);
-	const isInView = useInView(ref, { threshold: 0.3, once: true });
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
-	return (
-		<section
-			id="workexperience"
-			className="section-padding bg-slate-950 relative overflow-hidden"
-		>
-			{/* Background gradient */}
-			<div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900"></div>
+  return (
+    <section id="work" className="section" style={{ borderBottom: "1px solid var(--border)" }}>
+      <div className="container" ref={ref}>
 
-			<div className="relative z-10 max-w-7xl mx-auto">
-				{/* Section Header */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}
-					viewport={{ once: true }}
-					className="text-center mb-16"
-				>
-					<h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-						Work <span className="gradient-text">Experience</span>
-					</h2>
-					<div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
-				</motion.div>
+        <motion.span
+          className="section-label"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          Experience
+        </motion.span>
 
-				{/* Experience Content */}
-				<div className="grid lg:grid-cols-2 gap-12 items-center">
-					{/* Illustration */}
-					<motion.div
-						initial={{ opacity: 0, x: -50 }}
-						animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-						transition={{ duration: 0.8, delay: 0.2 }}
-						className="order-2 lg:order-1"
-					>
-						<div className="relative animate-float">
-							<div className="w-full max-w-md mx-auto glass-effect rounded-2xl p-8">
-								<div className="text-center">
-									<div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mx-auto mb-6 flex items-center justify-center">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="32"
-											height="32"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											strokeWidth="2"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											className="text-white"
-										>
-											<rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-											<line x1="8" y1="21" x2="16" y2="21" />
-											<line x1="12" y1="17" x2="12" y2="21" />
-										</svg>
-									</div>
-									<h3 className="text-xl font-bold text-white mb-2">
-										Professional Journey
-									</h3>
-									<p className="text-slate-300 text-sm">
-										Building innovative solutions through quality engineering
-									</p>
-								</div>
-							</div>
-						</div>
-					</motion.div>
+        <motion.h2
+          className="display-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          style={{ marginBottom: "3rem", maxWidth: "20ch" }}
+        >
+          Where I've built things
+        </motion.h2>
 
-					{/* Experience Timeline */}
-					<motion.div
-						ref={ref}
-						initial={{ opacity: 0, x: 50 }}
-						animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-						transition={{ duration: 0.8, delay: 0.4 }}
-						className="order-1 lg:order-2"
-					>
-						<div className="space-y-8">
-							{workExperience.map((experience, index) => (
-								<motion.div
-									key={index}
-									initial={{ opacity: 0, y: 30 }}
-									animate={
-										isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-									}
-									transition={{ duration: 0.6, delay: 0.6 + index * 0.2 }}
-									className="glass-effect rounded-2xl p-8 relative"
-								>
-									{/* Timeline dot */}
-									<div className="absolute -left-4 top-8 w-8 h-8 glass-effect rounded-full flex items-center justify-center">
-										<div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse"></div>
-									</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+          {jobs.map((job, i) => (
+            <motion.div
+              key={job.company}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="card"
+              style={{ padding: "clamp(1.5rem, 3vw, 2.25rem)", borderRadius: i === 0 ? "8px 8px 0 0" : i === jobs.length - 1 ? "0 0 8px 8px" : "0" }}
+            >
+              {/* Header row */}
+              <div style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                flexWrap: "wrap",
+                gap: "0.75rem",
+                marginBottom: "0.75rem",
+              }}>
+                <div>
+                  <h3 className="heading">{job.company}</h3>
+                  <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--accent)", marginTop: "0.2rem", letterSpacing: "0.02em" }}>
+                    {job.role}
+                  </p>
+                </div>
+                <div style={{ textAlign: "right", flexShrink: 0 }}>
+                  <span className="caption">{job.period}</span>
+                  <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "var(--text-muted)", marginTop: "0.15rem" }}>{job.location}</p>
+                </div>
+              </div>
 
-									{/* Company Icon */}
-									<div className="flex items-start gap-4 mb-4">
-										<div className="glass-effect rounded-xl p-3">
-											<img
-												src={`icons/${experience.icon}`}
-												alt="Work Icon"
-												className="w-8 h-8"
-											/>
-										</div>
-										<div className="flex-1">
-											<h3 className="text-2xl font-bold text-white mb-2">
-												{experience.company}
-											</h3>
-											<h4 className="text-lg font-semibold text-blue-400 mb-2">
-												{experience.position}
-											</h4>
-											<p className="text-slate-400 text-sm font-medium">
-												{experience.duration}
-											</p>
-										</div>
-									</div>
+              {/* Summary */}
+              <p className="body" style={{ marginBottom: "1.25rem" }}>{job.summary}</p>
 
-									{/* Description */}
-									<p className="text-slate-300 leading-relaxed mb-6">
-										{experience.description}
-									</p>
+              {/* Highlights */}
+              <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+                {job.highlights.map((h) => (
+                  <li key={h} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
+                    <span style={{ color: "var(--accent)", flexShrink: 0, marginTop: "0.15em", fontSize: "0.75rem" }}>→</span>
+                    <span className="body" style={{ fontSize: "0.875rem" }}>{h}</span>
+                  </li>
+                ))}
+              </ul>
 
-									{/* Achievements */}
-									<div className="space-y-2">
-										<h5 className="text-white font-semibold mb-3">
-											Key Achievements:
-										</h5>
-										{experience.achievements.map(
-											(achievement, achievementIndex) => (
-												<motion.div
-													key={achievementIndex}
-													initial={{ opacity: 0, x: 20 }}
-													animate={
-														isInView
-															? { opacity: 1, x: 0 }
-															: { opacity: 0, x: 20 }
-													}
-													transition={{
-														duration: 0.4,
-														delay: 0.8 + index * 0.2 + achievementIndex * 0.1,
-													}}
-													className="flex items-center gap-3"
-												>
-													<div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"></div>
-													<p className="text-slate-300 text-sm">
-														{achievement}
-													</p>
-												</motion.div>
-											)
-										)}
-									</div>
-								</motion.div>
-							))}
-						</div>
-					</motion.div>
-				</div>
-			</div>
-		</section>
-	);
+              {/* Stack tags */}
+              <div style={{ display: "flex", gap: "0.375rem", flexWrap: "wrap", marginTop: "1.5rem" }}>
+                {job.stack.map((t) => (
+                  <span key={t} className="tag">{t}</span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default WorkExperience;

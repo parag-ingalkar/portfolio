@@ -1,241 +1,132 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 import Skills from "./Skills";
 
-const images = ["./profile/me1.jpg", "./profile/me2.jpg", "./profile/me3.jpeg"];
-
 const About = () => {
-	const [activeIndex, setActiveIndex] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
-	// Cycle image every 4 seconds
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setActiveIndex((prev) => (prev + 1) % images.length);
-		}, 4000);
+  return (
+    <section id="about" className="section" style={{ borderBottom: "1px solid var(--border)" }}>
+      <div className="container" ref={ref}>
 
-		return () => clearInterval(interval);
-	}, []);
+        <motion.span
+          className="section-label"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          About
+        </motion.span>
 
-	const ref = useRef(null);
-	const isInView = useInView(ref, { once: true, threshold: 0.3 });
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "clamp(2rem, 6vw, 5rem)",
+          alignItems: "start",
+        }}>
 
-	const socialLinks = [
-		{
-			href: "mailto:ingalkarparag@gmail.com",
-			label: "Email",
-			icon: (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					<rect width="20" height="16" x="2" y="4" rx="2"></rect>
-					<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-				</svg>
-			),
-		},
-		{
-			href: "https://www.linkedin.com/in/parag-ingalkar-b08818160/",
-			label: "LinkedIn",
-			icon: (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-					<rect width="4" height="12" x="2" y="9"></rect>
-					<circle cx="4" cy="4" r="2"></circle>
-				</svg>
-			),
-		},
-		{
-			href: "https://github.com/parag-ingalkar",
-			label: "GitHub",
-			icon: (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
-					<path d="M9 18c-4.51 2-5-2-7-2"></path>
-				</svg>
-			),
-		},
-		{
-			href: "https://www.instagram.com/parag_ingalkar",
-			label: "Instagram",
-			icon: (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					<rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-					<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-					<line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-				</svg>
-			),
-		},
-	];
+          {/* Photo */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            style={{ maxWidth: "380px" }}
+          >
+            <div className="profile-img-wrap">
+              <img src="./profile/me2.jpg" alt="Parag Ingalkar" />
+            </div>
+            {/* Caption */}
+            <p style={{ marginTop: "0.75rem", fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "var(--text-muted)", letterSpacing: "0.06em" }}>
+              Erlangen, Germany · EU work rights
+            </p>
+          </motion.div>
 
-	return (
-		<section
-			id="about"
-			className="section-padding min-h-screen bg-slate-950 relative overflow-hidden"
-		>
-			{/* Background gradient */}
-			<div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900"></div>
+          {/* Copy */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
+          >
+            <h2 className="display-lg">
+              Building systems<br />
+              <em style={{ fontStyle: "italic", color: "var(--accent)", fontWeight: 300 }}>that hold up.</em>
+            </h2>
 
-			<div className="relative z-10 max-w-7xl mx-auto">
-				{/* Section Header */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-					transition={{ duration: 0.6 }}
-					className="text-center mb-16"
-				>
-					<h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-						About <span className="gradient-text">Me</span>
-					</h2>
-					<div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
-				</motion.div>
+            <p className="body-lg" style={{ marginTop: "0.5rem" }}>
+              I'm a full-stack engineer who enjoys the whole stack — from data modelling
+              and API design to the React interface that ties it together. I'm quick to
+              own ambiguous problems and comfortable shipping features in small, agile teams.
+            </p>
 
-				{/* Main Content */}
-				<div className="grid lg:grid-cols-2 gap-12 items-center">
-					{/* Image Section */}
-					<motion.div
-						ref={ref}
-						initial={{ opacity: 0, x: -50 }}
-						animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-						transition={{ duration: 0.8, delay: 0.2 }}
-						className="relative"
-					>
-						<div className="relative w-full max-w-md mx-auto">
-							{/* Image container with modern styling */}
-							<div className="relative overflow-hidden rounded-3xl aspect-square">
-								<img
-									src="./profile/me2.jpg"
-									alt="profile-image"
-									className="w-full h-full object-cover object-[25%_75%]"
-								/>
-							</div>
+            <p className="body">
+              Outside engineering, my Master's thesis explored{" "}
+              <span style={{ color: "var(--text-primary)" }}>constitutive neural networks</span>{" "}
+              for discovering fiber dispersion in cardiac tissue — a project that sharpened
+              my instinct for rigorous evaluation and scientific writing. A research paper
+              based on the thesis is currently under peer review.
+            </p>
 
-							{/* Decorative elements */}
-							<div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 animate-pulse"></div>
-							<div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full opacity-20 animate-float"></div>
-						</div>
-					</motion.div>
+            <p className="body">
+              When I'm not coding I'm usually playing puzzle or obstacle games, following
+              space news, or going down rabbit holes on new tools.
+            </p>
 
-					{/* Content Section */}
-					<motion.div
-						initial={{ opacity: 0, x: 50 }}
-						animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-						transition={{ duration: 0.8, delay: 0.4 }}
-						className="space-y-6"
-					>
-						<div className="glass-effect rounded-2xl p-8 space-y-6">
-							<div className="space-y-4">
-								<p className="text-slate-300 text-lg leading-relaxed">
-									I'm a versatile developer with a strong foundation in{" "}
-									<span className="text-blue-400 font-semibold">
-										Automation and testing
-									</span>
-									, complemented by hands-on experience in{" "}
-									<span className="text-blue-400 font-semibold">
-										Web Development
-									</span>
-									,{" "}
-									<span className="text-blue-400 font-semibold">
-										Machine Learning
-									</span>
-									, and{" "}
-									<span className="text-blue-400 font-semibold">
-										Data Analysis
-									</span>
-									.
-								</p>
+            {/* Links */}
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
+              {[
+                { label: "GitHub", href: "https://github.com/parag-ingalkar" },
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/parag-ingalkar-b08818160/" },
+                { label: "Research paper ↗", href: "https://www.biorxiv.org/content/10.64898/2026.05.11.724139v1" },
+              ].map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.75rem",
+                    color: "var(--accent)",
+                    textDecoration: "none",
+                    borderBottom: "1px solid var(--accent-border)",
+                    paddingBottom: "1px",
+                    transition: "border-color 0.2s, opacity 0.2s",
+                    letterSpacing: "0.04em",
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = "0.7"}
+                  onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
 
-								<p className="text-slate-300 text-lg leading-relaxed">
-									I enjoy building efficient and intelligent solutions. Being a
-									quick learner, I'm always excited to explore new technologies
-									and collaborate on impactful projects.
-								</p>
+        {/* Skills below */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          style={{ marginTop: "clamp(3rem, 6vw, 5rem)" }}
+        >
+          <Skills />
+        </motion.div>
 
-								<p className="text-slate-300 text-lg leading-relaxed">
-									Beyond coding, I'm deeply curious about everything around
-									me—always questioning the "why" and "how" behind every task I
-									undertake. I'm an avid{" "}
-									<span className="text-purple-400 font-semibold">
-										space enthusiast
-									</span>{" "}
-									who enjoys listening to music, watching podcasts, and diving
-									into the latest tech trends.
-								</p>
-							</div>
+      </div>
 
-							{/* Social Links */}
-							<div className="pt-6 border-t border-slate-700">
-								<p className="text-slate-400 text-sm mb-4">Connect with me:</p>
-								<div className="flex space-x-4">
-									{socialLinks.map((link) => (
-										<motion.a
-											key={link.label}
-											href={link.href}
-											target={
-												link.href.startsWith("mailto") ? "_self" : "_blank"
-											}
-											rel={
-												link.href.startsWith("mailto")
-													? ""
-													: "noopener noreferrer"
-											}
-											aria-label={link.label}
-											className="p-3 rounded-xl glass-effect glass-hover text-slate-400 hover:text-white transition-all duration-300"
-											whileHover={{ scale: 1.1 }}
-											whileTap={{ scale: 0.95 }}
-										>
-											{link.icon}
-										</motion.a>
-									))}
-								</div>
-							</div>
-						</div>
-					</motion.div>
-				</div>
-			</div>
-
-			{/* Skills Section */}
-			<div className="mt-20">
-				<Skills />
-			</div>
-		</section>
-	);
+      <style>{`
+        @media (max-width: 768px) {
+          #about .container > div[style*="grid"] {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
 };
 
 export default About;
