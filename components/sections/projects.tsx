@@ -3,6 +3,7 @@ import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { PROJECTS, type Project } from "@/lib/profile-data";
 import { Github } from "@/components/icons/brand-icons";
+import { basePath } from "@/lib/utils";
 
 function FeaturedProject({ project }: { project: Project }) {
   return (
@@ -20,7 +21,7 @@ function FeaturedProject({ project }: { project: Project }) {
             TODO: replace /public/projects/<name>.png with a real screenshot. */}
         {project.cover && (
           <img
-            src={project.cover}
+            src={`${basePath}${project.cover}`}
             alt={`Illustrative cover for ${project.name}`}
             width={672}
             height={384}
