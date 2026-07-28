@@ -1,0 +1,281 @@
+@import "tailwindcss";
+/* @import "tw-animate-css"; */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/*
+ * Committed world - soft sage-tinted paper, warm charcoal ink, one muted sage
+ * accent. Calm and pastel as the brief asked, but not the AI-default
+ * cream-plus-terracotta or the six-color pastel rainbow.
+ */
+:root {
+  --radius: 0.75rem;
+
+  /* Sage-tinted cool paper - deliberately not warm cream. */
+  --background: oklch(0.985 0.006 160);
+  --foreground: oklch(0.27 0.012 70);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.012 70);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.27 0.012 70);
+
+  /* One committed accent: muted sage. */
+  --primary: oklch(0.55 0.06 155);
+  --primary-foreground: oklch(0.99 0.004 160);
+
+  --secondary: oklch(0.96 0.008 160);
+  --secondary-foreground: oklch(0.32 0.012 70);
+
+  --muted: oklch(0.955 0.006 160);
+  --muted-foreground: oklch(0.48 0.012 70);
+
+  --accent: oklch(0.94 0.014 155);
+  --accent-foreground: oklch(0.3 0.02 155);
+
+  --destructive: oklch(0.55 0.14 28);
+  --border: oklch(0.89 0.008 160);
+  --input: oklch(0.92 0.008 160);
+  --ring: oklch(0.55 0.06 155);
+
+  --chart-1: oklch(0.55 0.06 155);
+  --chart-2: oklch(0.6 0.05 60);
+  --chart-3: oklch(0.5 0.04 220);
+  --chart-4: oklch(0.65 0.07 90);
+  --chart-5: oklch(0.55 0.05 290);
+
+  --sidebar: oklch(0.97 0.006 160);
+  --sidebar-foreground: oklch(0.27 0.012 70);
+  --sidebar-primary: oklch(0.55 0.06 155);
+  --sidebar-primary-foreground: oklch(0.99 0.004 160);
+  --sidebar-accent: oklch(0.94 0.014 155);
+  --sidebar-accent-foreground: oklch(0.3 0.02 155);
+  --sidebar-border: oklch(0.89 0.008 160);
+  --sidebar-ring: oklch(0.55 0.06 155);
+}
+
+.dark {
+  /* Deep warm-neutral charcoal - not pure black, not blue-black. */
+  --background: oklch(0.19 0.006 70);
+  --foreground: oklch(0.94 0.006 160);
+
+  --card: oklch(0.235 0.007 70);
+  --card-foreground: oklch(0.94 0.006 160);
+
+  --popover: oklch(0.235 0.007 70);
+  --popover-foreground: oklch(0.94 0.006 160);
+
+  --primary: oklch(0.72 0.07 155);
+  --primary-foreground: oklch(0.19 0.006 70);
+
+  --secondary: oklch(0.3 0.008 70);
+  --secondary-foreground: oklch(0.9 0.006 160);
+
+  --muted: oklch(0.3 0.008 70);
+  --muted-foreground: oklch(0.7 0.01 70);
+
+  --accent: oklch(0.34 0.02 155);
+  --accent-foreground: oklch(0.86 0.03 155);
+
+  --destructive: oklch(0.62 0.15 28);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.72 0.07 155);
+
+  --chart-1: oklch(0.72 0.07 155);
+  --chart-2: oklch(0.72 0.06 60);
+  --chart-3: oklch(0.66 0.05 220);
+  --chart-4: oklch(0.76 0.08 90);
+  --chart-5: oklch(0.68 0.06 290);
+
+  --sidebar: oklch(0.235 0.007 70);
+  --sidebar-foreground: oklch(0.94 0.006 160);
+  --sidebar-primary: oklch(0.72 0.07 155);
+  --sidebar-primary-foreground: oklch(0.19 0.006 70);
+  --sidebar-accent: oklch(0.34 0.02 155);
+  --sidebar-accent-foreground: oklch(0.86 0.03 155);
+  --sidebar-border: oklch(1 0 0 / 9%);
+  --sidebar-ring: oklch(0.72 0.07 155);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+    /* Slightly more breathing room than the default. */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Calm, narrow custom scrollbar. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 9999px;
+    border: 3px solid var(--background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+  /* Type roles - deliberate scale, tuned tracking, measure ceiling. */
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  /* Comfortable reading measure for prose. */
+  .measure {
+    max-width: 68ch;
+  }
+  /* Hairline rule used for structural separation instead of card chrome. */
+  .rule {
+    border-color: var(--border);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Long-form markdown rendering for blog posts. */
+  .prose-quiet {
+    color: var(--foreground);
+    max-width: 68ch;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  .prose-quiet h1,
+  .prose-quiet h2,
+  .prose-quiet h3 {
+    color: var(--foreground);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-quiet h1 {
+    font-size: 2rem;
+  }
+  .prose-quiet h2 {
+    font-size: 1.5rem;
+  }
+  .prose-quiet h3 {
+    font-size: 1.2rem;
+  }
+  .prose-quiet p {
+    margin-top: 1rem;
+  }
+  .prose-quiet a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .prose-quiet a:hover {
+    text-decoration-thickness: 2px;
+  }
+  .prose-quiet code {
+    background: var(--muted);
+    padding: 0.12rem 0.38rem;
+    border-radius: 0.3rem;
+    font-size: 0.9em;
+    font-family: var(--font-mono);
+  }
+  .prose-quiet pre {
+    background: var(--muted);
+    padding: 1rem 1.25rem;
+    border-radius: 0.625rem;
+    overflow-x: auto;
+    margin-top: 1.25rem;
+  }
+  .prose-quiet pre code {
+    background: transparent;
+    padding: 0;
+  }
+  .prose-quiet blockquote {
+    border-left: 2px solid var(--primary);
+    padding-left: 1rem;
+    color: var(--muted-foreground);
+    font-style: italic;
+    margin-top: 1.25rem;
+  }
+  .prose-quiet ul,
+  .prose-quiet ol {
+    padding-left: 1.25rem;
+    margin-top: 1rem;
+  }
+  .prose-quiet ul {
+    list-style: disc;
+  }
+  .prose-quiet ol {
+    list-style: decimal;
+  }
+  .prose-quiet li {
+    margin-top: 0.4rem;
+  }
+  .prose-quiet li::marker {
+    color: var(--muted-foreground);
+  }
+  .prose-quiet hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+}
