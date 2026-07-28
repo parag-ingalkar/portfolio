@@ -1,6 +1,7 @@
 import { GraduationCap } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { EDUCATION, PROFILE } from "@/lib/profile-data";
+import { basePath } from "@/lib/utils";
 
 export function About() {
   return (
@@ -15,7 +16,7 @@ export function About() {
         />
         <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:gap-10">
           <img
-            src="/profile.png"
+            src={`${basePath}/profile.png`}
             alt={`Portrait of ${PROFILE.name}`}
             width={208}
             height={277}
