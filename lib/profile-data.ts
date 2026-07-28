@@ -14,6 +14,8 @@
  *  - Replace the placeholder resume PDF with the real file.
  */
 
+import { basePath } from "./utils";
+
 export const PROFILE = {
   name: "Parag Ingalkar",
   role: "Full-Stack Software Engineer",
@@ -26,7 +28,7 @@ export const PROFILE = {
   // The Résumé button links to a print-optimized page at /resume/ where a
   // reviewer can save as PDF. To ship a direct PDF download instead, drop a
   // real file at /public/resume.pdf and set this to "/resume.pdf".
-  resumeUrl: "/resume/",
+  resumeUrl: `${basePath}/resume`,
   socials: {
     github: "https://github.com/parag-ingalkar",
     linkedin: "https://www.linkedin.com/in/parag-ingalkar-b08818160/",
