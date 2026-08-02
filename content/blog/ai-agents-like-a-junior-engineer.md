@@ -1,7 +1,7 @@
 ---
 title: "Using AI agents like a junior engineer, not a magic wand"
 excerpt: "AI-assisted development works best when you treat the agent like a capable but uncontexted teammate: give it scope, review its work, and never let it ship alone."
-date: "2025-12-15"
+date: "2026-06-15"
 tags: ["ai", "workflow", "productivity"]
 ---
 
