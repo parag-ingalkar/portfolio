@@ -103,13 +103,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <head>
-        <Script
-          data-goatcounter="https://paragingalkar.goatcounter.com/count"
-          src="https://gc.zgo.at/count.js"
-          strategy="afterInteractive"
-        />
-      </head>
+      <Script
+        data-goatcounter="https://paragingalkar.goatcounter.com/count"
+        src="https://gc.zgo.at/count.js"
+        strategy="afterInteractive"
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
