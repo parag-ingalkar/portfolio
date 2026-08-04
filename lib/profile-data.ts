@@ -180,7 +180,7 @@ export const PROJECTS: Project[] = [
     name: "VaultLog",
     tagline: "Secrets management with audit logs",
     description:
-      "Security-first secrets sharing with JWT auth, CSRF, RBAC, and least-privilege access. Prototype exploring compliance-grade design.",
+      "Security-first secrets sharing with JWT auth, CSRF, RBAC, and least-privilege access.",
     status: "Prototype",
     featured: false,
     stack: ["FastAPI", "React"],
@@ -194,7 +194,7 @@ export const PROJECTS: Project[] = [
     name: "Easy Payroll",
     tagline: "One-click attendance and payroll",
     description:
-      "A payroll and attendance tool for small businesses still running on spreadsheets. Simplifies the workflow to a single action. Prototype.",
+      "A payroll and attendance tool for small businesses still running on spreadsheets. Simplifies the workflow to a single action.",
     status: "Prototype",
     featured: false,
     stack: ["FastAPI", "React", "PostgreSQL"],
@@ -202,6 +202,20 @@ export const PROJECTS: Project[] = [
     highlights: [
       "Strong business logic and product thinking.",
       "Workflow simplification for non-technical owners.",
+    ],
+  },
+  {
+    name: "Spotify Playlist Manager",
+    tagline: "Manage your collaborative playlists",
+    description:
+      "A simple tool that allows users to remove all songs added by a collaborator in a Spotify playlist.",
+    status: "Prototype",
+    featured: false,
+    stack: ["FastAPI", "React", "PostgreSQL"],
+    repo: "https://spotify-playlist-manager-app.vercel.app/",
+    highlights: [
+      "Problem solving and automation skills.",
+      "Bulk deletion of songs workflow.",
     ],
   },
 ];

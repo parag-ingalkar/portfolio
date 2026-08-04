@@ -92,9 +92,9 @@ function PrototypeRow({ project }: { project: Project }) {
           <h4 className="text-base font-medium text-foreground">
             {project.name}
           </h4>
-          <span className="text-xs text-muted-foreground">
+          {/* <span className="text-xs text-muted-foreground">
             {project.status}
-          </span>
+          </span> */}
         </div>
         <p className="text-sm text-muted-foreground">{project.tagline}</p>
       </div>
@@ -143,7 +143,7 @@ export function Projects() {
         {prototypes.length > 0 && (
           <div className="mt-16">
             <h3 className="text-sm font-medium text-muted-foreground">
-              Prototypes
+              Other projects
             </h3>
             <ul className="mt-5">
               {prototypes.map((p) => (
